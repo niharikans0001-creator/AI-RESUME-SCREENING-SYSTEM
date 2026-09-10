@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Screening System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>AI Resume Screening System</h1>
+            <p>Upload a resume and compare it with a job description</p>
+        </div>
+
+        <div class="card">
+
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+
+                <label class="label">📄 Upload Resume</label>
+
+                <div class="upload-box">
+                    <input type="file"
+                           name="resume"
+                           accept=".pdf,.docx"
+                           required>
+                    <p>Supported formats: PDF, DOCX</p>
+                </div>
+
+
+                <label class="label">📝 Job Description</label>
+
+                <textarea
+                    name="job_description"
+                    placeholder="Enter the job description here..."
+                    required></textarea>
+
+
+                <button type="submit">
+                    Screen Resume
+                </button>
+
+            </form>
+                        <a href="{{ url_for('history') }}" class="history-btn">
+                📋 View Screening History
+            </a> 
+
+        </div>
+                <div class="how-it-works">
+
+            <h2>How It Works</h2>
+
+            <div class="steps">
+
+                <div class="step">
+                    <div class="step-icon">📄</div>
+                    <h3>Upload Resume</h3>
+                    <p>Upload your PDF or DOCX resume.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-icon">🔍</div>
+                    <h3>Extract Skills</h3>
+                    <p>The system identifies skills from the resume.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-icon">🎯</div>
+                    <h3>Compare</h3>
+                    <p>Skills are compared with the job description.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-icon">📊</div>
+                    <h3>Get Results</h3>
+                    <p>View your match score and missing skills.</p>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="features">
+
+    <div class="feature-card">
+        <h3>🤖 AI-Based Screening</h3>
+        <p>Automatically analyzes resumes and identifies relevant skills.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📊 Match Score</h3>
+        <p>Calculates how closely a resume matches the given job description.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📋 Screening History</h3>
+        <p>Stores previous screening results for quick review.</p>
+    </div>
+
+</div> 
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Screening History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>Screening History</h1>
+            <p>Previous resume screening results</p>
+        </div>
+
+        <div class="card">
+            <div class="dashboard">
+
+    <div class="stat-card">
+        <h3>Total Candidates</h3>
+        <p>{{ total_candidates }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Average Score</h3>
+        <p>{{ average_score }}%</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Best Score</h3>
+        <p>{{ best_score }}%</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Best Candidate</h3>
+        <p>{{ best_candidate }}</p>
+    </div>
+
+</div>
+
+            {% if history %}
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Candidate</th>
+                            <th>Match Score</th>
+                            <th>Matched Skills</th>
+                            <th>Missing Skills</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for record in history %}
+
+                        <tr>
+
+                            <td>
+                                {{ record[1] }}
+                            </td>
+
+                            <td>
+                                <td>
+    <strong class="
+        {% if record[2] >= 80 %}
+            history-strong
+        {% elif record[2] >= 50 %}
+            history-moderate
+        {% else %}
+            history-low
+        {% endif %}">
+        {{ record[2] }}%
+    </strong>
+</td>
+                            </td>
+
+                            <td>
+                                {{ record[3] }}
+                            </td>
+
+                            <td>
+                                {{ record[4] }}
+                            </td>
+
+                            <td>
+                                {{ record[5] }}
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <p class="no-history">
+                No screening history available yet.
+            </p>
+
+            {% endif %}
+
+            <a href="{{ url_for('home') }}" class="history-btn">
+                ← Back to Resume Screening
+            </a>
+            <form action="{{ url_for('clear_history') }}" method="POST"
+      onsubmit="return confirm('Are you sure you want to delete all screening history?');">
+
+    <button type="submit" class="clear-btn">
+        🗑️ Clear Screening History
+    </button>
+
+</form> 
+
+        </div>
+
+    </div>
+
+</body>
+
+</html> 

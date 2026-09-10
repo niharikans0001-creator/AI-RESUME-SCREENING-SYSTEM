@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Screening Results</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Resume Screening Results</h1>
+        <p>AI-powered analysis of the candidate's resume</p>
+
+        <h3>Candidate: {{ candidate_name }}</h3>
+    </div>
+
+    <!-- Match Score -->
+    <div class="result-card">
+        <h2>Match Score</h2>
+
+        <div class="score-circle">
+    <div class="score">
+        {{ score }}%
+    </div>
+</div>
+
+        <p class="match-status
+            {% if score >= 80 %}
+                strong
+            {% elif score >= 50 %}
+                moderate
+            {% else %}
+                low
+            {% endif %}">
+            {{ match_status }}
+        </p>
+
+        <p>Overall resume and job description similarity</p>
+    </div>
+
+    <!-- Matched Skills -->
+    <div class="result-card">
+        <h2>✅ Matched Skills</h2>
+
+        <div class="skills">
+            {% for skill in matched_skills %}
+                <span class="skill matched">{{ skill }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Missing Skills -->
+    <div class="result-card">
+        <h2>❌ Missing Skills</h2>
+
+        <div class="skills">
+            {% for skill in missing_skills %}
+                <span class="skill missing">{{ skill }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Detected Resume Skills -->
+    <div class="result-card">
+        <h2>📄 Detected Resume Skills</h2>
+
+        <div class="skills">
+            {% for skill in resume_skills %}
+                <span class="skill">{{ skill }}</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="/" class="back-button">← Screen Another Resume</a>
+    <a href="{{ url_for('history') }}" class="history-btn">
+    📋 View Screening History
+</a>
+
+</div>
+
+</body>
+</html>
